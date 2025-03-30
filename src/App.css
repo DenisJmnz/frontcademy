@@ -1,0 +1,60 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 64px; /* Altura del AppBar */
+}
+
+@media (min-width: 600px) {
+  .main-content {
+    margin-top: 70px; /* Altura del AppBar en desktop */
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 12px;
+  }
+}
+
+/* Estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+@keyframes expandLogo {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.1) scaleY(0.1);
+    transform-origin: center;
+  }
+  50% {
+    opacity: 0.7;
+    transform: scaleX(1.1) scaleY(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.logo-animation {
+  animation: expandLogo 1.2s cubic-bezier(0.17, 0.55, 0.55, 1) forwards;
+}

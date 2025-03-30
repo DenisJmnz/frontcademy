@@ -1,0 +1,48 @@
+export const blogData = {
+  "articles": [
+    {
+      "title": "Introduccion a la IA",
+      "description": "Descubre los conceptos basicos de la IA y su impacto en la tecnologia actual",
+      "url": "https://example.com/ia-intro",
+      "urlToImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+      "publishedAt": "2024-03-15T10:30:00",
+      "source": {
+        "name": "Tech News"
+      },
+      "category": "ia"
+    },
+    {
+      "title": "Guia de Ciberseguridad",
+      "description": "Las mejores practicas para proteger tus sistemas y datos",
+      "url": "https://example.com/cyber-guide", 
+      "urlToImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+      "publishedAt": "2024-03-14T16:45:00",
+      "source": {
+        "name": "Cyber News"
+      },
+      "category": "cyber"
+    },
+    {
+      "title": "Desarrollo Web Moderno",
+      "description": "Las ultimas tendencias en desarrollo web y mejores practicas",
+      "url": "https://example.com/web-dev",
+      "urlToImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+      "publishedAt": "2024-03-13T09:15:00",
+      "source": {
+        "name": "Dev News"
+      },
+      "category": "programacion"
+    },
+    {
+      "title": "Big Data Analytics",
+      "description": "Como el analisis de datos esta transformando los negocios",
+      "url": "https://example.com/big-data",
+      "urlToImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+      "publishedAt": "2024-03-12T14:20:00",
+      "source": {
+        "name": "Data News"
+      },
+      "category": "data"
+    }
+  ]
+}; 
