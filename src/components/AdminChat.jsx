@@ -18,7 +18,21 @@ const AdminChat = () => {
   const isMobile = useResponsive();
 
   useEffect(() => {
-    const newSocket = io('http://localhost:5000');
+    // Determinar la URL del servidor según el entorno
+    const isProduction = import.meta.env.PROD;
+    const serverUrl = isProduction 
+      ? 'https://backademy.onrender.com'
+      : (import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'http://localhost:5000');
+    
+    console.log('=== Admin Chat Configuration ===');
+    console.log('Server URL:', serverUrl);
+    console.log('Environment:', {
+      isProduction,
+      mode: import.meta.env.MODE
+    });
+    console.log('===============================');
+
+    const newSocket = io(serverUrl);
     setSocket(newSocket);
     
     // Autenticación del admin

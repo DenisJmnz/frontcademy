@@ -5,11 +5,25 @@ export class ChatService {
     this.socket = null;
     this.connected = false;
     this.messageCallbacks = new Set();
+    
+    // Determinar la URL del servidor según el entorno
+    const isProduction = import.meta.env.PROD;
+    this.serverUrl = isProduction 
+      ? 'https://backademy.onrender.com'
+      : (import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'http://localhost:5000');
+    
+    console.log('=== Chat Service Configuration ===');
+    console.log('Server URL:', this.serverUrl);
+    console.log('Environment:', {
+      isProduction,
+      mode: import.meta.env.MODE
+    });
+    console.log('===============================');
   }
 
   connect() {
     if (!this.connected) {
-      this.socket = io('http://localhost:5000', {
+      this.socket = io(this.serverUrl, {
         transports: ['websocket', 'polling'],
         reconnection: true,
         reconnectionAttempts: 5,

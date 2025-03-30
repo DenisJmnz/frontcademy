@@ -23,6 +23,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { alpha } from '@mui/material/styles';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { ApiService } from '../core/infrastructure/api/ApiService';
 
 const masters = [
   { value: 'fullstack', label: 'Máster en Desarrollo Full Stack' },
@@ -79,6 +80,7 @@ const contactSchedules = [
 const ContactForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const apiService = new ApiService();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -112,25 +114,13 @@ const ContactForm = () => {
     setIsLoading(true);
     
     try {
-      const response = await fetch('http://localhost:5000/api/form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
+      const response = await apiService.sendContactForm(formData);
+      console.log('Respuesta del servidor:', response);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      console.log('Respuesta del servidor:', data);
-
-      if (data.success) {
+      if (response.success) {
         setIsSubmitted(true);
       } else {
-        console.error('Error del servidor:', data.error);
+        console.error('Error del servidor:', response.error);
       }
     } catch (error) {
       console.error('Error de red:', error);

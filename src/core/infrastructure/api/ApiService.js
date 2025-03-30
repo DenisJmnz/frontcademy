@@ -1,11 +1,39 @@
 export class ApiService {
   constructor() {
-    this.baseUrl = import.meta.env.VITE_API_URL;
-    console.log('API URL:', this.baseUrl);
+    // Forzar la URL de producción si estamos en producción
+    const isProduction = import.meta.env.PROD;
+    this.baseUrl = isProduction 
+      ? 'https://backademy.onrender.com'
+      : (import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'http://localhost:5000');
+    
+    console.log('=== API Service Configuration ===');
+    console.log('Environment:', {
+      isProduction,
+      mode: import.meta.env.MODE,
+      dev: import.meta.env.DEV,
+      prod: import.meta.env.PROD,
+      baseUrl: this.baseUrl,
+      viteApiUrl: import.meta.env.VITE_API_URL,
+      viteEnv: import.meta.env.VITE_ENV
+    });
+    console.log('===============================');
   }
 
   async request(endpoint, options = {}) {
-    const url = `${this.baseUrl}${endpoint}`;
+    // Asegurarnos de que el endpoint siempre comience con slash
+    const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    const url = `${this.baseUrl}${normalizedEndpoint}`;
+    
+    console.log('=== Making API Request ===');
+    console.log('Request details:', {
+      url,
+      endpoint,
+      normalizedEndpoint,
+      baseUrl: this.baseUrl,
+      method: options.method || 'GET'
+    });
+    console.log('=========================');
+    
     const defaultOptions = {
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +51,14 @@ export class ApiService {
       
       return await response.json();
     } catch (error) {
-      console.error('API Error:', error);
+      console.error('=== API Error ===');
+      console.error('Error details:', {
+        error,
+        url,
+        endpoint,
+        baseUrl: this.baseUrl
+      });
+      console.error('=====================');
       throw error;
     }
   }
