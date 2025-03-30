@@ -7,6 +7,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import PersonIcon from '@mui/icons-material/Person';
 import SendIcon from '@mui/icons-material/Send';
 import { useResponsive } from '../hooks/useResponsive';
+import { environment } from '../config/environment';
 
 const AdminChat = () => {
   const [socket, setSocket] = useState(null);
@@ -18,21 +19,11 @@ const AdminChat = () => {
   const isMobile = useResponsive();
 
   useEffect(() => {
-    // Determinar la URL del servidor según el entorno
-    const isProduction = import.meta.env.PROD;
-    const serverUrl = isProduction 
-      ? 'https://backademy.onrender.com'
-      : (import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'http://localhost:5000');
-    
     console.log('=== Admin Chat Configuration ===');
-    console.log('Server URL:', serverUrl);
-    console.log('Environment:', {
-      isProduction,
-      mode: import.meta.env.MODE
-    });
+    console.log('Server URL:', environment.wsUrl);
     console.log('===============================');
 
-    const newSocket = io(serverUrl);
+    const newSocket = io(environment.wsUrl);
     setSocket(newSocket);
     
     // Autenticación del admin

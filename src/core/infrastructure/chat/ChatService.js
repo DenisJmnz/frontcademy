@@ -1,23 +1,15 @@
 import { io } from 'socket.io-client';
+import { environment } from '../../config/environment';
 
 export class ChatService {
   constructor() {
     this.socket = null;
     this.connected = false;
     this.messageCallbacks = new Set();
-    
-    // Determinar la URL del servidor según el entorno
-    const isProduction = import.meta.env.PROD;
-    this.serverUrl = isProduction 
-      ? 'https://backademy.onrender.com'
-      : (import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'http://localhost:5000');
+    this.serverUrl = environment.wsUrl;
     
     console.log('=== Chat Service Configuration ===');
     console.log('Server URL:', this.serverUrl);
-    console.log('Environment:', {
-      isProduction,
-      mode: import.meta.env.MODE
-    });
     console.log('===============================');
   }
 

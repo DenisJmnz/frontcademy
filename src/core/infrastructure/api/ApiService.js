@@ -1,21 +1,10 @@
+import { environment } from '../../config/environment';
+
 export class ApiService {
   constructor() {
-    // Forzar la URL de producción si estamos en producción
-    const isProduction = import.meta.env.PROD;
-    this.baseUrl = isProduction 
-      ? 'https://backademy.onrender.com'
-      : (import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'http://localhost:5000');
-    
+    this.baseUrl = environment.apiUrl;
     console.log('=== API Service Configuration ===');
-    console.log('Environment:', {
-      isProduction,
-      mode: import.meta.env.MODE,
-      dev: import.meta.env.DEV,
-      prod: import.meta.env.PROD,
-      baseUrl: this.baseUrl,
-      viteApiUrl: import.meta.env.VITE_API_URL,
-      viteEnv: import.meta.env.VITE_ENV
-    });
+    console.log('Base URL:', this.baseUrl);
     console.log('===============================');
   }
 
