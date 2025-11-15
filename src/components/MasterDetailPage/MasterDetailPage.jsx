@@ -100,10 +100,12 @@ const MasterDetailPage = ({ masterData }) => {
   const masterColor = getMasterColor();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    // Scroll inmediato al top sin animación
+    window.scrollTo(0, 0);
+    // También forzamos el scroll después de un pequeño delay para asegurar que el DOM esté listo
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
   }, []);
 
   const handleContact = () => {
@@ -464,7 +466,7 @@ const MasterDetailPage = ({ masterData }) => {
                     gap: 1,
                     color: 'primary.main'
                   }}>
-                    <EuroIcon sx={{ fontSize: '2rem' }} /> 5.500
+                    5.500 <EuroIcon sx={{ fontSize: '2rem' }} />
                   </Typography>
                   <Typography 
                     sx={{ 
@@ -682,10 +684,10 @@ const MasterDetailPage = ({ masterData }) => {
         display: { xs: 'none', md: 'block' },
         position: 'absolute',
         top: (() => {
-          if (location.includes('ia')) return '70vh'; // IA: más abajo
-          if (location.includes('fullstack')) return '75vh'; // Desarrollo: más arriba
-          if (location.includes('ciber') || location.includes('cyber')) return '70vh'; // Ciber: más abajo
-          if (location.includes('data')) return '70vh'; // Data: más abajo
+          if (location.includes('ia')) return '72vh'; // IA: un poco más arriba
+          if (location.includes('fullstack')) return '80vh'; // Desarrollo: más arriba
+          if (location.includes('data')) return '65vh'; // Data: más abajo
+          if (location.includes('ciber') || location.includes('cyber')) return '70vh'; // Ciber: un poco más arriba
           return '80vh'; // Por defecto
         })(),
         right: '5%',
@@ -736,7 +738,7 @@ const MasterDetailPage = ({ masterData }) => {
                     gap: 1,
                     color: 'primary.main'
                   }}>
-                    <EuroIcon sx={{ fontSize: '2rem' }} /> 5.500
+                    5.500 <EuroIcon sx={{ fontSize: '2rem' }} />
                   </Typography>
                   <Typography 
                     sx={{ 

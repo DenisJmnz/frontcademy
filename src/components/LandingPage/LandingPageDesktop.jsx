@@ -227,8 +227,9 @@ const LandingPageDesktop = () => {
       component="main" 
       sx={{ 
         width: '100%',
-        overflowX: 'clip',
-        position: 'relative'
+        position: 'relative',
+        minHeight: '100vh',
+        overflow: 'visible'
     }}>
       {/* Hero Section */}
       <Box

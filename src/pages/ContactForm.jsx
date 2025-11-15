@@ -96,10 +96,20 @@ const ContactForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    // Scroll inmediato al top sin animación
+    window.scrollTo(0, 0);
+    // Forzamos el scroll múltiples veces para asegurar que funcione
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+    
+    scrollToTop();
+    setTimeout(scrollToTop, 0);
+    setTimeout(scrollToTop, 10);
+    setTimeout(scrollToTop, 50);
+    setTimeout(scrollToTop, 100);
   }, []);
 
   const handleChange = (event) => {
@@ -224,7 +234,8 @@ const ContactForm = () => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           minHeight: '300px',
-          marginTop: '-64px',
+          marginTop: { xs: '-64px', md: '-70px' },
+          paddingTop: { xs: '64px', md: '70px' },
           display: 'flex',
           alignItems: 'center',
           '&::before': {

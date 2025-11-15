@@ -94,7 +94,7 @@ const AdminLogin = () => {
 const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   min-height: 100vh;
   margin: 0;
   background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
@@ -117,13 +117,12 @@ const LoginPaper = styled(Paper)`
   max-width: ${props => props.isMobile ? '100%' : '400px'};
   padding: ${props => props.isMobile ? '1rem' : '1.5rem'};
   border-radius: ${props => props.isMobile ? '0' : '8px'};
-  margin: ${props => props.isMobile ? '1.5rem auto 2rem' : '2rem auto 2rem'};
+  margin: ${props => props.isMobile ? '0' : '0 auto'};
   box-shadow: ${props => props.isMobile ? 'none' : '0 8px 24px rgba(0,0,0,0.15)'};
   background: white;
   
   @media (max-width: 768px) {
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
+    margin: 0;
   }
 `;
 

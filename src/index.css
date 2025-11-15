@@ -5,21 +5,27 @@
   font-family: 'DM Sans', sans-serif;
 }
 
-html, body {
-  height: 100%;
+html {
   width: 100%;
+  overflow-x: hidden;
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  touch-action: pan-y;
 }
 
 body {
+  width: 100%;
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
   color: #333;
-  background-color: #f8fafc;
+  background-color: #ffffff;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  color-scheme: light;
 }
 
 img {
@@ -30,6 +36,28 @@ img {
 @media (max-width: 600px) {
   html {
     font-size: 14px;
+    overflow-x: hidden;
+    width: 100%;
+    touch-action: pan-y;
+  }
+  
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+    background-color: #ffffff;
+  }
+  
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Prevenir scroll horizontal en elementos multimedia */
+  img, video, iframe, embed, object {
+    max-width: 100%;
+    height: auto;
   }
 }
 

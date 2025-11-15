@@ -13,6 +13,7 @@ import ChatBot from './components/ChatBot'
 
 const theme = createTheme({
   palette: {
+    mode: 'light',
     primary: {
       main: '#1976d2',
     },
@@ -41,6 +42,22 @@ const theme = createTheme({
 function AppContent() {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
+
+  // Scroll to top cuando cambia la ruta
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+    
+    scrollToTop();
+    // Forzar scroll múltiples veces para asegurar que funcione
+    setTimeout(scrollToTop, 0);
+    setTimeout(scrollToTop, 10);
+    setTimeout(scrollToTop, 50);
+    setTimeout(scrollToTop, 100);
+  }, [location.pathname]);
 
   return (
     <div className="app-container">

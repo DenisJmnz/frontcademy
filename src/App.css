@@ -2,16 +2,22 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  background-color: #ffffff;
+  color-scheme: light;
+  overflow-x: hidden;
 }
 
 .main-content {
   flex: 1;
-  padding-top: 64px; /* Altura del AppBar */
+  width: 100%;
+  position: relative;
+  padding-top: 64px; /* Compensar altura del AppBar */
 }
 
 @media (min-width: 600px) {
   .main-content {
-    margin-top: 70px; /* Altura del AppBar en desktop */
+    padding-top: 70px; /* Altura del AppBar en desktop */
   }
 }
 
