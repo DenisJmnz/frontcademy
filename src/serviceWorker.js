@@ -2,7 +2,6 @@ const CACHE_NAME = 'appcademy-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/assets/appcademy-logo.svg',
   '/fonts/roboto-mono-v22-latin-900.woff2',
   '/master-ia.pdf',
   '/master-cibersecurity.pdf',

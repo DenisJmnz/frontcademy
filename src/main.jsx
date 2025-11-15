@@ -7,7 +7,6 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 // Precargar recursos críticos
 const preloadResources = () => {
   const resources = [
-    { rel: 'preload', href: '/assets/appcademy-logo.svg', as: 'image' },
     { rel: 'preload', href: '/fonts/roboto-mono-v22-latin-900.woff2', as: 'font', type: 'font/woff2', crossorigin: true }
   ];
   
