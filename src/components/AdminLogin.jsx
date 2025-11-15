@@ -105,6 +105,7 @@ const LoginContainer = styled.div`
   right: 0;
   bottom: 0;
   height: calc(100vh - 64px);
+  overflow-y: auto;
 
   .main-content {
     padding-top: 0 !important;
@@ -116,12 +117,13 @@ const LoginPaper = styled(Paper)`
   max-width: ${props => props.isMobile ? '100%' : '400px'};
   padding: ${props => props.isMobile ? '1rem' : '1.5rem'};
   border-radius: ${props => props.isMobile ? '0' : '8px'};
-  margin: ${props => props.isMobile ? '0' : '2rem auto 0'};
+  margin: ${props => props.isMobile ? '1.5rem auto 2rem' : '2rem auto 2rem'};
   box-shadow: ${props => props.isMobile ? 'none' : '0 8px 24px rgba(0,0,0,0.15)'};
   background: white;
   
   @media (max-width: 768px) {
     margin-top: 1.5rem;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -150,6 +152,7 @@ const InputLabel = styled.div`
 `;
 
 const Label = styled.label`
+  font-family: 'DM Sans', sans-serif;
   font-weight: 500;
   color: #666;
   text-align: center;
@@ -165,6 +168,7 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  font-family: 'DM Sans', sans-serif;
   transition: all 0.3s ease;
 
   &:focus {
@@ -175,6 +179,7 @@ const Input = styled.input`
 
   &::placeholder {
     color: #aaa;
+    font-family: 'DM Sans', sans-serif;
   }
 `;
 
@@ -186,6 +191,7 @@ const LoginButton = styled.button`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -206,6 +212,7 @@ const HelpLink = styled.a`
   color: #1976d2;
   text-decoration: none;
   font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
   
   &:hover {
     text-decoration: underline;
@@ -226,6 +233,7 @@ const ErrorMessage = styled.div`
   margin-bottom: 1.5rem;
   text-align: center;
   font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
 `;
 
 export default AdminLogin;

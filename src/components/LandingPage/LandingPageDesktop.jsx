@@ -50,11 +50,13 @@ const StatNumber = styled.div`
   color: white;
   font-size: 2.5rem;
   font-weight: bold;
+  font-family: 'DM Sans', sans-serif;
 `;
 
 const StatLabel = styled.div`
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.1rem;
+  font-family: 'DM Sans', sans-serif;
 `;
 
 const LandingPageDesktop = () => {
@@ -464,7 +466,7 @@ const LandingPageDesktop = () => {
             ¿Por qué elegirnos?
           </Typography>
           
-          <Grid container spacing={3}>
+          <Grid container spacing={{ xs: 3, md: 5 }}>
             <Grid item xs={12} md={6}>
               <Box 
                 component="img"
@@ -485,6 +487,7 @@ const LandingPageDesktop = () => {
               />
             </Grid>
             <Grid item xs={12} md={6}>
+              <Box sx={{ pl: { xs: 0, md: 1.5 } }}>
               <Grid container spacing={3}>
                 {reasons.map((reason, index) => (
                   <Grid item xs={12} key={index}>
@@ -513,6 +516,7 @@ const LandingPageDesktop = () => {
                   </Grid>
                 ))}
               </Grid>
+              </Box>
             </Grid>
           </Grid>
         </Container>
@@ -623,9 +627,9 @@ const LandingPageDesktop = () => {
       <Box 
         id="about"
         sx={{ 
-          pt: 0,
+          pt: { xs: 4, md: 6 },
           pb: { xs: 4, md: 8 },
-          scrollMarginTop: '67px'
+          scrollMarginTop: '100px'
         }}
       >
         <Container>
@@ -634,7 +638,7 @@ const LandingPageDesktop = () => {
             sx={{ 
               textAlign: 'center',
               mb: { xs: 4, md: 8 },
-              mt: 4,
+              mt: 0,
               fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
               fontWeight: 'bold'
             }}

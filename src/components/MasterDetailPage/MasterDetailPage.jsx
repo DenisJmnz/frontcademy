@@ -681,10 +681,16 @@ const MasterDetailPage = ({ masterData }) => {
       <Box sx={{ 
         display: { xs: 'none', md: 'block' },
         position: 'absolute',
-        top: (location.includes('ciber') || location.includes('cyber') || location.includes('ia')) ? '72vh' : '80vh',
+        top: (() => {
+          if (location.includes('ia')) return '70vh'; // IA: más abajo
+          if (location.includes('fullstack')) return '75vh'; // Desarrollo: más arriba
+          if (location.includes('ciber') || location.includes('cyber')) return '70vh'; // Ciber: más abajo
+          if (location.includes('data')) return '70vh'; // Data: más abajo
+          return '80vh'; // Por defecto
+        })(),
         right: '5%',
         width: '380px',
-        transform: (location.includes('ciber') || location.includes('cyber') || location.includes('ia')) ? 'scale(0.95)' : 'none'
+        transform: (location.includes('ciber') || location.includes('cyber') || location.includes('data') || location.includes('ia')) ? 'scale(0.95)' : 'none'
       }}>
         <Card sx={{ p: 4 }}>
           <Stack spacing={3}>

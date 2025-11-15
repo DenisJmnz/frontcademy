@@ -273,6 +273,7 @@ const MessageContent = styled.div`
   background: ${props => props.$isAdmin ? '#0284C7' : '#f1f5f9'};
   color: ${props => props.$isAdmin ? 'white' : '#1e293b'};
   box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  font-family: 'DM Sans', sans-serif;
 `;
 
 const ResponseForm = styled.form`
@@ -288,6 +289,7 @@ const ResponseInput = styled.input`
   border: 1px solid #ddd;
   border-radius: 0.5rem;
   font-size: 1rem;
+  font-family: 'DM Sans', sans-serif;
 
   &:focus {
     outline: none;
@@ -301,6 +303,7 @@ const SendButton = styled.button`
   border: none;
   border-radius: 0.5rem;
   padding: 0.75rem;
+  font-family: 'DM Sans', sans-serif;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -314,6 +317,7 @@ const SendButton = styled.button`
 const LogoutButton = styled.button`
   padding: ${props => props.$isMobile ? '0.5rem' : '0.75rem 1.5rem'};
   font-size: ${props => props.$isMobile ? '0.9rem' : '1rem'};
+  font-family: 'DM Sans', sans-serif;
   width: ${props => props.$isMobile ? '40px' : 'auto'};
   height: ${props => props.$isMobile ? '40px' : 'auto'};
   border-radius: ${props => props.$isMobile ? '50%' : '0.5rem'};
@@ -337,6 +341,7 @@ const EmptyState = styled.div`
   justify-content: center;
   height: 100%;
   color: #666;
+  font-family: 'DM Sans', sans-serif;
 `;
 
 export default AdminChat; 

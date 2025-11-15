@@ -56,6 +56,9 @@ export const theme = createTheme({
       secondary: '#475569',
     },
   },
+  typography: {
+    fontFamily: '"DM Sans", sans-serif',
+  },
   components: {
     MuiButton: {
       styleOverrides: {

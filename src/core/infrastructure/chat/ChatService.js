@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-import { environment } from '../../config/environment';
+import { environment } from '../../../config/environment';
 
 export class ChatService {
   constructor() {

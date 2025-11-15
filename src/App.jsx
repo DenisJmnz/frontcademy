@@ -1,7 +1,8 @@
 import './App.css'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, useLocation } from 'react-router-dom'
 import AppBar from './components/AppBar/AppBar'
 import AppRoutes from './routes/AppRoutes'
+import Footer from './components/Footer/Footer'
 import { ThemeProvider } from '@mui/material/styles'
 import { createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -24,7 +25,7 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: '"DM Sans", sans-serif',
     h1: {
       fontWeight: 700,
     },
@@ -36,6 +37,22 @@ const theme = createTheme({
     },
   },
 });
+
+function AppContent() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login';
+
+  return (
+    <div className="app-container">
+      <AppBar />
+      <main className="main-content">
+        <AppRoutes />
+      </main>
+      {!isLoginPage && <Footer />}
+      <ChatBot />
+    </div>
+  );
+}
 
 function App() {
   useEffect(() => {
@@ -54,13 +71,7 @@ function App() {
     <Router basename="/">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app-container">
-          <AppBar />
-          <main className="main-content">
-            <AppRoutes />
-          </main>
-          <ChatBot />
-        </div>
+        <AppContent />
       </ThemeProvider>
     </Router>
   );

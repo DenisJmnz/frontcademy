@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   AppBar as MuiAppBar, 
   Box, 
@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import NewLogo43 from './NewLogo43';
+import Logo from './Logo';
 import styled from 'styled-components';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import LoginIcon from '@mui/icons-material/Login';
@@ -35,11 +35,54 @@ function AppBar() {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
   const location = useLocation();
+  const pendingSectionRef = useRef(null);
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
   });
   const isAdmin = localStorage.getItem('adminAuth') === 'true';
+
+  // Efecto para hacer scroll a la sección cuando la navegación se completa
+  useEffect(() => {
+    if (pendingSectionRef.current && location.pathname === '/') {
+      const sectionId = pendingSectionRef.current;
+      
+      const scrollToSection = () => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const navbarHeight = 67;
+          const extraOffset = sectionId === 'about' ? 25 : 20;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: elementPosition - navbarHeight - extraOffset,
+            behavior: 'smooth'
+          });
+          pendingSectionRef.current = null;
+          return true;
+        }
+        return false;
+      };
+      
+      // Esperar un momento para que el componente se renderice completamente
+      const timeoutId = setTimeout(() => {
+        let attempts = 0;
+        const maxAttempts = 20;
+        const tryScroll = setInterval(() => {
+          attempts++;
+          if (scrollToSection() || attempts >= maxAttempts) {
+            clearInterval(tryScroll);
+            if (attempts >= maxAttempts) {
+              pendingSectionRef.current = null;
+            }
+          }
+        }, 50);
+      }, 100);
+      
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [location.pathname]);
 
   const handleNavigation = (path, isSection) => {
     setMobileOpen(false);
@@ -53,16 +96,38 @@ function AppBar() {
       } else {
         navigate('/');
       }
-    } else if (isSection && window.location.pathname === '/') {
+    } else if (isSection) {
       const sectionId = path.replace('/#', '');
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const navbarHeight = 67;
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top: elementPosition - navbarHeight,
-          behavior: 'smooth'
-        });
+      
+      // Si es una sección, navegar a la página principal primero si no estamos ahí
+      if (window.location.pathname !== '/') {
+        // Guardar la sección a la que queremos navegar
+        pendingSectionRef.current = sectionId;
+        navigate('/');
+      } else {
+        // Ya estamos en la página principal, hacer scroll directamente
+        const scrollToSection = () => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const navbarHeight = 67;
+            const extraOffset = sectionId === 'about' ? 25 : 20;
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+              top: elementPosition - navbarHeight - extraOffset,
+              behavior: 'smooth'
+            });
+            return true;
+          }
+          return false;
+        };
+        
+        // Intentar hacer scroll inmediatamente
+        if (!scrollToSection()) {
+          // Si no se encuentra, intentar después de un pequeño delay
+          setTimeout(() => {
+            scrollToSection();
+          }, 50);
+        }
       }
     } else {
       navigate(path);
@@ -74,6 +139,7 @@ function AppBar() {
   };
 
   const handleAdminClick = () => {
+    setMobileOpen(false);
     if (isAdmin) {
       navigate('/admin');
     } else {
@@ -86,10 +152,11 @@ function AppBar() {
       position="fixed" 
       elevation={0} 
       sx={{ 
-        bgcolor: 'white',
+        bgcolor: trigger ? 'rgba(255, 255, 255, 0.85)' : 'white',
         boxShadow: 'none',
         borderBottom: 'none',
-        transition: 'all 0.3s ease'
+        transition: 'all 0.3s ease',
+        backdropFilter: trigger ? 'blur(10px)' : 'none'
       }}
     >
       <Container maxWidth="lg">
@@ -105,7 +172,7 @@ function AppBar() {
             }}
             className="logo-animation"
           >
-            <NewLogo43 />
+            <Logo width={{ xs: 150, sm: 180, md: 220 }} />
           </Box>
 
           {isMobile ? (
@@ -240,6 +307,7 @@ const AdminText = styled.span`
   color: #333;
   font-size: 0.95rem;
   font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
   
   &:hover {
     color: #1976d2;
